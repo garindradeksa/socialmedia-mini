@@ -46,9 +46,6 @@ func main() {
 	e.POST("/register", userHdl.Register())
 	e.POST("/login", userHdl.Login())
 
-	e.GET("/contents/:id", contentHdl.ContentDetail())
-	e.GET("/contents", contentHdl.ContentList())
-
 	user := e.Group("/users")
 
 	content := e.Group("")
@@ -58,13 +55,15 @@ func main() {
 	comment.Use(middleware.JWT([]byte(config.JWTKey)))
 
 	user.GET("/:username", contentHdl.GetProfile())
-	user.GET("", userHdl.Profile(), middleware.JWT([]byte(config.JWTKey)))
-	user.PUT("", userHdl.Update(), middleware.JWT([]byte(config.JWTKey)))
+	user.GET("/profile", userHdl.Profile(), middleware.JWT([]byte(config.JWTKey)))
+	user.PUT("/profile", userHdl.Update(), middleware.JWT([]byte(config.JWTKey)))
 	user.DELETE("", userHdl.Deactivate(), middleware.JWT([]byte(config.JWTKey)))
 
 	content.POST("/contents", contentHdl.Add())
 	content.PUT("/contents/:id", contentHdl.Update())
 	content.DELETE("/contents/:id", contentHdl.Delete())
+	e.GET("/contents/:id", contentHdl.ContentDetail())
+	e.GET("/contents", contentHdl.ContentList())
 
 	comment.POST("/comments/:id", commentHdl.Add())
 	comment.DELETE("/comments/:id", commentHdl.Delete())

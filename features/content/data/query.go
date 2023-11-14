@@ -130,36 +130,3 @@ func (cd *contentData) GetProfile(username string) (interface{}, error) {
 
 	return resProfile, nil
 }
-
-// 	// res := map[string]interface{}{}
-
-// 	// if err := cd.db.Raw("SELECT users.id, users.avatar as pp_path, users.banner, users.name, users.username, users.bio from users where username = ?", username).Find(&res).Error; err != nil {
-// 	// 	log.Println("get user content by username query error : ", err.Error())
-// 	// 	return nil, err
-// 	// }
-
-// 	// resultContent := []map[string]interface{}{}
-// 	// // resContent := Contents{}
-
-// 	// if err := cd.db.Raw("SELECT cn.id, cn.image, cn.caption, u.username, u.avatar, c.text FROM contents cn JOIN users u1 ON u1.id = cn.user_id JOIN comments c ON c.content_id = cn.id JOIN users u ON u.id = c.user_id ").Where("u1.username = ?", username).Find(&resultContent).Error; err != nil {
-// 	// 	log.Println("get user content by username query error : ", err.Error())
-// 	// 	return nil, err
-// 	// }
-
-// 	// resComment := map[string]interface{}{}
-
-// 	// for _, v := range resultContent{
-// 	// 	if v["id"] = resultContent.ID{
-// 	// 		resComment = v
-// 	// 	}
-// 	// }
-// 	// // resultContent["id"] = resContent.ID
-// 	// // resultContent["avatar"] = resContent.Avatar
-// 	// // resultContent["username"] = resContent.Username
-// 	// // resultContent["image"] = resContent.Image
-// 	// // resultContent["caption"] = resContent.Caption
-// 	// // resultContent["user_id"] = resContent.UserID
-
-// 	// return res, nil
-
-// }

@@ -19,7 +19,6 @@ type Contents struct {
 	CreatedAt time.Time
 	Comment   []data.Comments `gorm:"foreignkey:ContentID"`
 }
-
 type AllContents struct {
 	ID        uint
 	Avatar    string
