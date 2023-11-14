@@ -2,6 +2,7 @@ package services
 
 import (
 	"errors"
+	"mime/multipart"
 	"testing"
 
 	"github.com/garindradeksa/socialmedia-mini/features/content"
@@ -10,6 +11,89 @@ import (
 	"github.com/golang-jwt/jwt"
 	"github.com/stretchr/testify/assert"
 )
+
+func TestAdd(t *testing.T) {
+	repo := mocks.NewContentData(t)
+
+	t.Run("Success adding new content", func(t *testing.T) {
+		inputContent := content.Core{Caption: "Happy New Year!"}
+		resContent := content.Core{ID: 1, Caption: "Happy New Year!"}
+		repo.On("Add", uint(1), inputContent).Return(resContent, nil).Once()
+
+		srv := New(repo)
+		_, token := helper.GenerateJWT(1)
+		pToken := token.(*jwt.Token)
+		pToken.Valid = true
+		res, err := srv.Add(multipart.FileHeader{}, pToken, inputContent)
+
+		assert.Nil(t, err)
+		assert.Equal(t, resContent.ID, res.ID)
+		assert.Equal(t, inputContent.Caption, res.Caption)
+		repo.AssertExpectations(t)
+	})
+
+	t.Run("Invalid JWT token", func(t *testing.T) {
+		inputContent := content.Core{Caption: "Happy New Year!"}
+		srv := New(repo)
+
+		_, token := helper.GenerateJWT(0)
+		pToken := token.(*jwt.Token)
+		pToken.Valid = true
+
+		res, err := srv.Add(multipart.FileHeader{}, pToken, inputContent)
+
+		assert.NotNil(t, err)
+		assert.ErrorContains(t, err, "user not found")
+		assert.Equal(t, uint(0), res.ID)
+		repo.AssertExpectations(t)
+	})
+
+	t.Run("Invalid input data due to validation error", func(t *testing.T) {
+		inputContent := content.Core{Caption: ""}
+		srv := New(repo)
+		_, token := helper.GenerateJWT(1)
+		pToken := token.(*jwt.Token)
+		pToken.Valid = true
+
+		res, err := srv.Add(multipart.FileHeader{}, pToken, inputContent)
+
+		assert.NotNil(t, err)
+		assert.ErrorContains(t, err, "invalid input")
+		assert.Equal(t, uint(0), res.ID)
+		repo.AssertExpectations(t)
+	})
+
+	t.Run("File size is too big", func(t *testing.T) {
+		srv := New(repo)
+		_, token := helper.GenerateJWT(1)
+		pToken := token.(*jwt.Token)
+		pToken.Valid = true
+		fileHeader := multipart.FileHeader{Size: 6000000}
+
+		res, err := srv.Add(fileHeader, pToken, content.Core{})
+
+		assert.NotNil(t, err)
+		assert.ErrorContains(t, err, "file size is too big")
+		assert.Equal(t, uint(0), res.ID)
+		repo.AssertExpectations(t)
+	})
+
+	t.Run("Form file is not a jpg or png type", func(t *testing.T) {
+		srv := New(repo)
+		_, token := helper.GenerateJWT(1)
+		pToken := token.(*jwt.Token)
+		pToken.Valid = true
+		fileHeader := multipart.FileHeader{Filename: "test.txt"}
+
+		res, err := srv.Add(fileHeader, pToken, content.Core{})
+
+		assert.NotNil(t, err)
+		assert.ErrorContains(t, err, "use jpg or png type file")
+		assert.Equal(t, uint(0), res.ID)
+		repo.AssertExpectations(t)
+	})
+
+}
 
 func TestUpdate(t *testing.T) {
 	repo := mocks.NewContentData(t)
@@ -207,7 +291,7 @@ func TestGetProfile(t *testing.T) {
 		repo.On("GetProfile", "habib").Return(resData, nil).Once()
 
 		srv := New(repo)
-		res, err := srv.ContentDetail(uint(1))
+		res, err := srv.GetProfile("habib")
 
 		assert.Nil(t, err)
 		assert.NotEmpty(t, res)
