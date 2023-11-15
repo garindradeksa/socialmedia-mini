@@ -129,18 +129,3 @@ func (ch *contentHandle) Delete() echo.HandlerFunc {
 		return c.JSON(http.StatusAccepted, "Success delete content")
 	}
 }
-
-func (ch *contentHandle) GetProfile() echo.HandlerFunc {
-	return func(c echo.Context) error {
-		paramUsername := c.Param("username")
-
-		res, err := ch.srv.GetProfile(paramUsername)
-
-		if err != nil {
-			return c.JSON(helper.PrintErrorResponse(err.Error()))
-		}
-		return c.JSON(helper.PrintSuccessReponse(http.StatusCreated, "success get user content", res))
-	}
-}
-
-// Done
