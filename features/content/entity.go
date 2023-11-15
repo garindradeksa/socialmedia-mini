@@ -43,3 +43,5 @@ type ContentData interface {
 	Update(userID uint, contentID uint, updatedContent Core) (Core, error)
 	Delete(userID uint, contentID uint) error
 }
+
+// Done

@@ -91,3 +91,5 @@ func AllListToCore(data []AllContents) []content.Core {
 	}
 	return dataCore
 }
+
+// Done

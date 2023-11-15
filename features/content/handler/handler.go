@@ -142,3 +142,5 @@ func (ch *contentHandle) GetProfile() echo.HandlerFunc {
 		return c.JSON(helper.PrintSuccessReponse(http.StatusCreated, "success get user content", res))
 	}
 }
+
+// Done
