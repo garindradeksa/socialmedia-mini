@@ -49,3 +49,5 @@ func ToCore(data interface{}) *user.Core {
 
 	return &res
 }
+
+// Done

@@ -115,3 +115,5 @@ func (uc *userControll) Deactivate() echo.HandlerFunc {
 		return c.JSON(http.StatusAccepted, "Deactivated your account successfully")
 	}
 }
+
+// Done

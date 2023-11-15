@@ -104,3 +104,5 @@ func (uq *userQuery) Deactivate(id uint) error {
 
 	return nil
 }
+
+// Done
