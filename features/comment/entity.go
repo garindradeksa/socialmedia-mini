@@ -25,3 +25,5 @@ type CommentData interface {
 	Add(userID uint, newComment Core, contentID uint) (Core, error)
 	Delete(userID uint, commentID uint) error
 }
+
+// Done

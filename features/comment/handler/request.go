@@ -14,3 +14,5 @@ func ToCore(data interface{}) *comment.Core {
 
 	return &res
 }
+
+// Done
