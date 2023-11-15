@@ -68,3 +68,5 @@ func (cd *commentData) CommentList() ([]comment.Core, error) {
 	}
 	return AllListToCore(res), nil
 }
+
+// Done

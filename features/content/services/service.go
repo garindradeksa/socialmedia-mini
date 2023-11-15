@@ -146,3 +146,4 @@ func (cs *contentSrv) Delete(token interface{}, contentID uint) error {
 
 	return nil
 }
+

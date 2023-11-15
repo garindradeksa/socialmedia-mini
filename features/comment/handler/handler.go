@@ -71,3 +71,5 @@ func (cs *commentControll) Delete() echo.HandlerFunc {
 		return c.JSON(http.StatusAccepted, "Deleted a comment successfully")
 	}
 }
+
+// Done

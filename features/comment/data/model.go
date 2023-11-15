@@ -76,3 +76,5 @@ func AllListToCore(data []AllComments) []comment.Core {
 	}
 	return dataCore
 }
+
+// Done

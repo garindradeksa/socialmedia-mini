@@ -179,3 +179,5 @@ func (uuc *userUseCase) Deactivate(token interface{}) error {
 
 	return nil
 }
+
+// Done
