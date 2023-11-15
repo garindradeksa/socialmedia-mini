@@ -54,7 +54,6 @@ func main() {
 	comment := e.Group("")
 	comment.Use(middleware.JWT([]byte(config.JWTKey)))
 
-	user.GET("/:username", contentHdl.GetProfile())
 	user.GET("/profile", userHdl.Profile(), middleware.JWT([]byte(config.JWTKey)))
 	user.PUT("/profile", userHdl.Update(), middleware.JWT([]byte(config.JWTKey)))
 	user.DELETE("", userHdl.Deactivate(), middleware.JWT([]byte(config.JWTKey)))
