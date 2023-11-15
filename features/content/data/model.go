@@ -11,8 +11,6 @@ import (
 
 type Contents struct {
 	gorm.Model
-	Avatar    string
-	Username  string
 	Image     string
 	Caption   string
 	UserID    uint
@@ -21,8 +19,6 @@ type Contents struct {
 }
 type AllContents struct {
 	ID        uint
-	Avatar    string
-	Username  string
 	Image     string
 	Caption   string
 	CreatedAt time.Time
@@ -32,8 +28,6 @@ type AllContents struct {
 func ToCore(data Contents) content.Core {
 	return content.Core{
 		ID:        data.ID,
-		Avatar:    data.Avatar,
-		Username:  data.Username,
 		Image:     data.Image,
 		Caption:   data.Caption,
 		UserID:    data.UserID,
@@ -44,8 +38,6 @@ func ToCore(data Contents) content.Core {
 func CoreToData(data content.Core) Contents {
 	return Contents{
 		Model:     gorm.Model{ID: data.ID},
-		Avatar:    data.Avatar,
-		Username:  data.Username,
 		Image:     data.Image,
 		Caption:   data.Caption,
 		UserID:    data.UserID,
@@ -56,8 +48,6 @@ func CoreToData(data content.Core) Contents {
 func (dataModel *Contents) ModelsToCore() content.Core {
 	return content.Core{
 		ID:        dataModel.ID,
-		Avatar:    dataModel.Avatar,
-		Username:  dataModel.Username,
 		Image:     dataModel.Image,
 		Caption:   dataModel.Caption,
 		UserID:    dataModel.UserID,
@@ -76,8 +66,6 @@ func ListToCore(data []Contents) []content.Core {
 func (dataModel *AllContents) AllModelsToCore() content.Core {
 	return content.Core{
 		ID:        dataModel.ID,
-		Avatar:    dataModel.Avatar,
-		Username:  dataModel.Username,
 		Image:     dataModel.Image,
 		Caption:   dataModel.Caption,
 		CreatedAt: dataModel.CreatedAt,
