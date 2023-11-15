@@ -20,3 +20,5 @@ func CoresToResponse(dataCore comment.Core) CommentResponse {
 		Text: dataCore.Text,
 	}
 }
+
+// Done

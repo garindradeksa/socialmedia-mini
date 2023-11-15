@@ -56,3 +56,5 @@ func (cs *commentSrv) Delete(token interface{}, commentID uint) error {
 
 	return nil
 }
+
+// Done
