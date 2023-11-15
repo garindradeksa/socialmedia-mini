@@ -46,3 +46,5 @@ func CoreToData(data user.Core) Users {
 		Password: data.Password,
 	}
 }
+
+// Done

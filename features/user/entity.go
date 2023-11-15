@@ -40,3 +40,5 @@ type UserData interface {
 	Update(updatedProfile Core) (Core, error)
 	Deactivate(id uint) error
 }
+
+// Done
