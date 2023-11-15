@@ -112,23 +112,3 @@ func (cd *contentData) Delete(userID uint, contentID uint) error {
 
 	return nil
 }
-
-func (cd *contentData) GetProfile(username string) (interface{}, error) {
-	resProfile := map[string]interface{}{}
-	if err := cd.db.Raw("SELECT users.name, users.avatar, users.banner, users.bio, users.username FROM users WHERE users.username = ?", username).Find(&resProfile).Error; err != nil {
-		log.Println("Get User Content by username query error : ", err.Error())
-		return []content.Core{}, err
-	}
-
-	resContent := []map[string]interface{}{}
-	if err := cd.db.Raw("SELECT contents.id, users.avatar, users.username, contents.image, contents.caption, contents.created_at FROM contents JOIN users ON users.id = contents.user_id WHERE users.username = ?", username).Find(&resContent).Error; err != nil {
-		log.Println("Get content by content ID query error : ", err.Error())
-		return nil, err
-	}
-
-	resProfile["contents"] = resContent
-
-	return resProfile, nil
-}
-
-// Done

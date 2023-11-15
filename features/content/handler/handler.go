@@ -129,3 +129,5 @@ func (ch *contentHandle) Delete() echo.HandlerFunc {
 		return c.JSON(http.StatusAccepted, "Success delete content")
 	}
 }
+
+//

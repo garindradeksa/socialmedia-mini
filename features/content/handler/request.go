@@ -28,5 +28,3 @@ func ToCore(data interface{}) *content.Core {
 
 	return &res
 }
-
-// Done
