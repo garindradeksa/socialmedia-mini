@@ -1,8 +1,8 @@
 FROM golang:1.21-alpine
 
-COPY local.env /app
+WORKDIR /app           
 
-WORKDIR /app
+COPY local.env .       
 
 RUN go mod tidy
 
