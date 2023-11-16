@@ -58,6 +58,7 @@ func main() {
 	user.PUT("/profile", userHdl.Update(), middleware.JWT([]byte(config.JWTKey)))
 	user.DELETE("", userHdl.Deactivate(), middleware.JWT([]byte(config.JWTKey)))
 
+	content.POST("/contents", contentHdl.Add())
 	content.PUT("/contents/:id", contentHdl.Update())
 	content.DELETE("/contents/:id", contentHdl.Delete())
 	e.GET("/contents/:id", contentHdl.ContentDetail())
