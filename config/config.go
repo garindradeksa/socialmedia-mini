@@ -57,7 +57,7 @@ func ReadEnv() *AppConfig {
 
 	if isRead {
 		viper.AddConfigPath(".")
-		viper.SetConfigName("local")
+		viper.SetConfigName("")
 		viper.SetConfigType("env")
 
 		err := viper.ReadInConfig()
@@ -80,7 +80,7 @@ func EnvCloudName() string {
 	if val, found := os.LookupEnv("CLOUDINARY_CLOUD_NAME"); found {
 		return val
 	} else {
-		err := godotenv.Load("local.env")
+		err := godotenv.Load(".env")
 		if err != nil {
 			log.Fatal("Error loading .env file")
 		}
@@ -92,7 +92,7 @@ func EnvCloudAPIKey() string {
 	if val, found := os.LookupEnv("CLOUDINARY_API_KEY"); found {
 		return val
 	} else {
-		err := godotenv.Load("local.env")
+		err := godotenv.Load(".env")
 		if err != nil {
 			log.Fatal("Error loading .env file")
 		}
@@ -104,7 +104,7 @@ func EnvCloudAPISecret() string {
 	if val, found := os.LookupEnv("CLOUDINARY_API_SECRET"); found {
 		return val
 	} else {
-		err := godotenv.Load("local.env")
+		err := godotenv.Load(".env")
 		if err != nil {
 			log.Fatal("Error loading .env file")
 		}
@@ -116,7 +116,7 @@ func EnvCloudUploadFolder() string {
 	if val, found := os.LookupEnv("CLOUDINARY_UPLOAD_FOLDER"); found {
 		return val
 	} else {
-		err := godotenv.Load("local.env")
+		err := godotenv.Load(".env")
 		if err != nil {
 			log.Fatal("Error loading .env file")
 		}

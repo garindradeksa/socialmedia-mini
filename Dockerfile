@@ -1,8 +1,10 @@
 FROM golang:1.21-alpine
 
+COPY . /app
+
 WORKDIR /app
 
-COPY local.env .
+RUN go mod tidy
 
 RUN go build -o app .
 
